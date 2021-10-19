@@ -157,13 +157,38 @@
         <!-- header area end -->
         <!-- page title area end -->
         <div class="main-content-inner">
-            {% for income in object_list %}
-            <li>{{ income.date|date}} - {{income.type}} - ${{income.value}} - Repetitive :{{income.repetitive}} </li>
-        {% empty %}
-            <li>No Incomes yet.</li>
-        {% endfor %}
-        </ul> 
         </div>
+        <!-- Primary table start -->
+        <div class="col-12 mt-5">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">Data Table Primary</h4>
+                    <div class="data-tables datatable-primary">
+                        <table id="dataTable2" class="text-center">
+                            <thead class="text-capitalize">
+                                <tr>
+                                    <th>{{Income.name}}</th>
+                                    <th>Position</th>
+                                    <th>Office</th>
+                                    <th>Age</th>
+                                    <th>Start Date</th>
+                                    <th>salary</th>
+                                </tr>
+                            </thead>
+                            <tbody>  {{ income.date|date}} - {{income.type}} - ${{income.value}} - Repetitive :{{income.repetitive}} </tbody>
+                                    {% for income in object_list %}
+                                    <li>{{ income.date|date}} - {{income.type}} - ${{income.value}} - Repetitive :{{income.repetitive}} </li>
+                                {% empty %}
+                                    <li>No Incomes yet.</li>
+                                {% endfor %}
+                                </ul>
+                            
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Primary table end -->
         <!-- main content area end -->
         <!-- footer area start-->
         <footer>
