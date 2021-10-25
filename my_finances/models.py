@@ -30,7 +30,7 @@ class Income(models.Model):
     user_id = models.IntegerField()
 
     def __str__(self):
-        return f'Income {self.id} {self.date.strftime("%/d/%m/%Y")}'
+        return f'Income {self.id} {self.date.strftime("%d/%m/%Y")}'
     class Meta:
         verbose_name_plural = "incomes"
 
@@ -68,7 +68,7 @@ class Outcome(models.Model):
     details = models.CharField(max_length=64)
     user_id = models.IntegerField()
     def __str__(self):
-        return f'Outcome {self.id} {self.date.strftime("%/d/%m/%Y")}'
+        return f'Outcome {self.id} {self.date.strftime("%m-%d-%Y")}'
     class Meta:
         verbose_name_plural = "outcomes"
 

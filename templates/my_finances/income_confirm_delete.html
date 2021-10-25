@@ -159,26 +159,20 @@
         <div class="main-content-row">
   
         <!-- Primary table start -->
-                            <h1>Income  {{object.pk}}</h1> 
-                                    <ul>
-                                        <li>Date : {{ income.date|date}}</li>
-                                        <li>Name :  {{ income.name }}</li>
-                                        <li>Value :  {{ income.value }}</li>
-                                        <li>Day of the month:  {{ income.repetition_time }}</li>
-                                        <li>User:  {{ income.user_id }}</li>
-                                        {% if income.reptitive %}
-                                            <li>
-                                                Every : {{ income.repetition_time }} {{ income.get_repetition_interval_display }}
-                                            </li>
-                                        {% endif %}
-                                    </ul>
-                            <a href ="{% url 'my_finances:income_update' object.pk %}">Update</a>
-                            <a href ="{% url 'my_finances:income_delete' object.pk %}">Delete</a>
+                            <h1>Income {{ object.pk }}</h1> 
+                            <form method="post">{% csrf_token %}
+                                <p>Are you sure you want to delete "{{ object }}"?</p>
+                                <input type="submit" value="Confirm">
+                            </form>
+                             
+                              
           </div>
         <!-- main content area end -->
         <!-- footer area start-->
         <footer>
-
+            <div class="footer-area">
+                <p>© Copyright 2018. All right reserved. Template by <a href="https://colorlib.com/wp/">Colorlib</a>.</p>
+            </div>
         </footer>
         <!-- footer area end-->
     </div>
