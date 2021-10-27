@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Personal Finances App</title>
+    <title>srtdash - SEO Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="{% static 'assets/images/icon/favicon.ico' %}">
     <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
@@ -40,8 +40,174 @@
         <!-- main header area start -->
         <div class="mainheader-area">
             <div class="container">
-                <h1>Incomes</h1>
-                <ul>
+                <div class="row align-items-center">
+                    <div class="col-md-3">
+                        <div class="logo">
+                            <a href="index.html"><img src="{% static 'assets/images/icon/logo2.png' %}" alt="logo"></a>
+                        </div>
+                    </div>
+                    <!-- profile info & task notification -->
+                    <div class="col-md-9 clearfix text-right">
+                        <div class="d-md-inline-block d-block mr-md-4">
+                            <ul class="notification-area">
+                                <li id="full-view"><i class="ti-fullscreen"></i></li>
+                                <li id="full-view-exit"><i class="ti-zoom-out"></i></li>
+                                <li class="dropdown">
+                                    <i class="ti-bell dropdown-toggle" data-toggle="dropdown">
+                                        <span>2</span>
+                                    </i>
+                                    <div class="dropdown-menu bell-notify-box notify-box">
+                                        <span class="notify-title">You have 3 new notifications <a href="#">view all</a></span>
+                                        <div class="nofity-list">
+                                            <a href="#" class="notify-item">
+                                                <div class="notify-thumb"><i class="ti-key btn-danger"></i></div>
+                                                <div class="notify-text">
+                                                    <p>You have Changed Your Password</p>
+                                                    <span>Just Now</span>
+                                                </div>
+                                            </a>
+                                            <a href="#" class="notify-item">
+                                                <div class="notify-thumb"><i class="ti-comments-smiley btn-info"></i></div>
+                                                <div class="notify-text">
+                                                    <p>New Commetns On Post</p>
+                                                    <span>30 Seconds ago</span>
+                                                </div>
+                                            </a>
+                                            <a href="#" class="notify-item">
+                                                <div class="notify-thumb"><i class="ti-key btn-primary"></i></div>
+                                                <div class="notify-text">
+                                                    <p>Some special like you</p>
+                                                    <span>Just Now</span>
+                                                </div>
+                                            </a>
+                                            <a href="#" class="notify-item">
+                                                <div class="notify-thumb"><i class="ti-comments-smiley btn-info"></i></div>
+                                                <div class="notify-text">
+                                                    <p>New Commetns On Post</p>
+                                                    <span>30 Seconds ago</span>
+                                                </div>
+                                            </a>
+                                            <a href="#" class="notify-item">
+                                                <div class="notify-thumb"><i class="ti-key btn-primary"></i></div>
+                                                <div class="notify-text">
+                                                    <p>Some special like you</p>
+                                                    <span>Just Now</span>
+                                                </div>
+                                            </a>
+                                            <a href="#" class="notify-item">
+                                                <div class="notify-thumb"><i class="ti-key btn-danger"></i></div>
+                                                <div class="notify-text">
+                                                    <p>You have Changed Your Password</p>
+                                                    <span>Just Now</span>
+                                                </div>
+                                            </a>
+                                            <a href="#" class="notify-item">
+                                                <div class="notify-thumb"><i class="ti-key btn-danger"></i></div>
+                                                <div class="notify-text">
+                                                    <p>You have Changed Your Password</p>
+                                                    <span>Just Now</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="dropdown">
+                                    <i class="fa fa-envelope-o dropdown-toggle" data-toggle="dropdown"><span>3</span></i>
+                                    <div class="dropdown-menu notify-box nt-enveloper-box">
+                                        <span class="notify-title">You have 3 new notifications <a href="#">view all</a></span>
+                                        <div class="nofity-list">
+                                            <a href="#" class="notify-item">
+                                                <div class="notify-thumb">
+                                                    <img src="{% static 'assets/images/author/author-img1.jpg' %}" alt="image">
+                                                </div>
+                                                <div class="notify-text">
+                                                    <p>Aglae Mayer</p>
+                                                    <span class="msg">Hey I am waiting for you...</span>
+                                                    <span>3:15 PM</span>
+                                                </div>
+                                            </a>
+                                            <a href="#" class="notify-item">
+                                                <div class="notify-thumb">
+                                                    <img src="{% static 'assets/images/author/author-img2.jpg' %}" alt="image">
+                                                </div>
+                                                <div class="notify-text">
+                                                    <p>Aglae Mayer</p>
+                                                    <span class="msg">When you can connect with me...</span>
+                                                    <span>3:15 PM</span>
+                                                </div>
+                                            </a>
+                                            <a href="#" class="notify-item">
+                                                <div class="notify-thumb">
+                                                    <img src="{% static 'assets/images/author/author-img3.jpg' %}" alt="image">
+                                                </div>
+                                                <div class="notify-text">
+                                                    <p>Aglae Mayer</p>
+                                                    <span class="msg">I missed you so much...</span>
+                                                    <span>3:15 PM</span>
+                                                </div>
+                                            </a>
+                                            <a href="#" class="notify-item">
+                                                <div class="notify-thumb">
+                                                    <img src="{% static 'assets/images/author/author-img4.jpg' %}" alt="image">
+                                                </div>
+                                                <div class="notify-text">
+                                                    <p>Aglae Mayer</p>
+                                                    <span class="msg">Your product is completely Ready...</span>
+                                                    <span>3:15 PM</span>
+                                                </div>
+                                            </a>
+                                            <a href="#" class="notify-item">
+                                                <div class="notify-thumb">
+                                                    <img src="{% static 'assets/images/author/author-img2.jpg' %}" alt="image">
+                                                </div>
+                                                <div class="notify-text">
+                                                    <p>Aglae Mayer</p>
+                                                    <span class="msg">Hey I am waiting for you...</span>
+                                                    <span>3:15 PM</span>
+                                                </div>
+                                            </a>
+                                            <a href="#" class="notify-item">
+                                                <div class="notify-thumb">
+                                                    <img src="{% static 'assets/images/author/author-img1.jpg' %}" alt="image">
+                                                </div>
+                                                <div class="notify-text">
+                                                    <p>Aglae Mayer</p>
+                                                    <span class="msg">Hey I am waiting for you...</span>
+                                                    <span>3:15 PM</span>
+                                                </div>
+                                            </a>
+                                            <a href="#" class="notify-item">
+                                                <div class="notify-thumb">
+                                                    <img src="{% static 'assets/images/author/author-img3.jpg' %}" alt="image">
+                                                </div>
+                                                <div class="notify-text">
+                                                    <p>Aglae Mayer</p>
+                                                    <span class="msg">Hey I am waiting for you...</span>
+                                                    <span>3:15 PM</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="settings-btn">
+                                    <i class="ti-settings"></i>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="clearfix d-md-inline-block d-block">
+                            <div class="user-profile m-0">
+                                <img class="avatar user-thumb" src="{% static 'assets/images/author/avatar.png' %}" alt="avatar">
+                                <h4 class="user-name dropdown-toggle" data-toggle="dropdown">Kumkum Rai <i class="fa fa-angle-down"></i></h4>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">Message</a>
+                                    <a class="dropdown-item" href="#">Settings</a>
+                                    <a class="dropdown-item" href="#">Log Out</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- main header area end -->
         <!-- header area start -->
@@ -55,17 +221,16 @@
                                     <li>
                                         <a href="javascript:void(0)"><i class="ti-dashboard"></i><span>dashboard</span></a>
                                         <ul class="submenu">
-                                            <li><a href="index.html">ICO dashboard</a></li>
+                                            <li><a href=c>Dashboard</a></li>
                                             <li><a href="index2.html">Ecommerce dashboard</a></li>
                                             <li><a href="index3.html">SEO dashboard</a></li>
                                         </ul>
                                     </li>
                                     <li class="active">
-                                        <a href="javascript:void(0)"><i class="ti-layout-sidebar-left"></i><span>Sidebar
-                                                Types</span></a>
+                                        <a href="javascript:void(0)"><i class="ti-layout-sidebar-left"></i><span>My finances App</span></a>
                                         <ul class="submenu">
-                                            <li><a href="index.html">Left Sidebar</a></li>
-                                            <li class="active"><a href="index3-horizontalmenu.html">Horizontal Sidebar</a></li>
+                                            <li class="active"></li><a href="{% url 'my_finances:income_list' %}"> Income list</a></li>
+                                            <li class="active"></li><a href="{% url 'my_finances:income_create' %}"> Add Income</a></li>
                                         </ul>
                                     </li>
                                     <li>
@@ -156,30 +321,36 @@
         </div>
         <!-- header area end -->
         <!-- page title area end -->
-        <div class="main-content-row">
-  
-        <!-- Primary table start -->
-                            <h1>Incomes</h1> 
-                                    {% for income in object_list %}
-                                    <li>
-                                        <a href = "{% url 'my_finances:income_detail' income.pk %}">
-                                        {{ income.date|date}} - {{ income.name }} - ${{income.value}} - Repetitive :{{income.repetitive}} 
-                                        every {{ income.repetition_time }}  {{ income.get_repetition_interval_display }} 
-                                {% empty %}
-                                        </a>
-                                    </li>
-                                    <li>No  incomes yet.</li>
-                                {% endfor %}
-                                </ul>
-          </div>
-        <!-- main content area end -->
-        <!-- footer area start-->
-        <footer>
-            <div class="footer-area">
-                <p>© Copyright 2018. All right reserved. Template by <a href="https://colorlib.com/wp/">Colorlib</a>.</p>
+        <div class="main-content-inner">
+            <div class="container">
+                <div class="row">
+
+                    <!-- Statistics area start -->
+                    <div class="col-lg-8 mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title">Incomes</h4>
+                                <h1></h1> 
+                                {% for income in object_list %}
+                                <li>
+                                    <a href = "{% url 'my_finances:income_detail' income.pk %}">
+                                    {{ income.date|date}} - {{ income.name }} - ${{income.value}} - Repetitive :{{income.repetitive}} 
+                                    every {{ income.repetition_time }}  {{ income.get_repetition_interval_display }} 
+                            {% empty %}
+                                    </a>
+                                </li>
+                                <li>No  incomes yet.</li>
+                            {% endfor %}
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Statistics area end -->
+                                    
+                </div>
             </div>
-        </footer>
-        <!-- footer area end-->
+        </div>
+        <!-- main content area end -->
     </div>
     <!-- main wrapper start -->
     <!-- offset area start -->

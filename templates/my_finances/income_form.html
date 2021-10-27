@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Personal Finances App</title>
+    <title>srtdash - SEO Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="{% static 'assets/images/icon/favicon.ico' %}">
     <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
@@ -221,17 +221,16 @@
                                     <li>
                                         <a href="javascript:void(0)"><i class="ti-dashboard"></i><span>dashboard</span></a>
                                         <ul class="submenu">
-                                            <li><a href="index.html">ICO dashboard</a></li>
+                                            <li><a href=c>Dashboard</a></li>
                                             <li><a href="index2.html">Ecommerce dashboard</a></li>
                                             <li><a href="index3.html">SEO dashboard</a></li>
                                         </ul>
                                     </li>
                                     <li class="active">
-                                        <a href="javascript:void(0)"><i class="ti-layout-sidebar-left"></i><span>Sidebar
-                                                Types</span></a>
+                                        <a href="javascript:void(0)"><i class="ti-layout-sidebar-left"></i><span>My finances App</span></a>
                                         <ul class="submenu">
-                                            <li><a href="index.html">Left Sidebar</a></li>
-                                            <li class="active"><a href="index3-horizontalmenu.html">Horizontal Sidebar</a></li>
+                                            <li class="active"></li><a href="{% url 'my_finances:income_list' %}"> Income list</a></li>
+                                            <li class="active"></li><a href="{% url 'my_finances:income_create' %}"> Add Income</a></li>
                                         </ul>
                                     </li>
                                     <li>
@@ -323,20 +322,28 @@
         <!-- header area end -->
         <!-- page title area end -->
         <div class="main-content-inner">
-            <form method="post">{% csrf_token %}
-                {{ form.as_p }}
-                <input type="submit" value="Save">
-            </form>
-                
+            <div class="container">
+                <div class="row">
+
+                    <!-- Statistics area start -->
+                    <div class="col-lg-8 mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title">Incomes</h4>
+                                <form method="post">{% csrf_token %}
+                                    {{ form.as_p }}
+                                    <input type="submit" value="Save">
+                                </form>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Statistics area end -->
+                                    
+                </div>
+            </div>
         </div>
         <!-- main content area end -->
-        <!-- footer area start-->
-        <footer>
-            <div class="footer-area">
-                <p>© Copyright 2018. All right reserved. Template by <a href="https://colorlib.com/wp/">Colorlib</a>.</p>
-            </div>
-        </footer>
-        <!-- footer area end-->
     </div>
     <!-- main wrapper start -->
     <!-- offset area start -->
