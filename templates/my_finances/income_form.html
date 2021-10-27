@@ -1,4 +1,5 @@
 {% load static %}
+{% load crispy_forms_tags %}
 
 <!doctype html>
 <html class="no-js" lang="en">
@@ -331,7 +332,7 @@
                             <div class="card-body">
                                 <h4 class="header-title">Incomes</h4>
                                 <form method="post">{% csrf_token %}
-                                    {{ form.as_p }}
+                                    {{ form|crispy }}
                                     <input type="submit" value="Save">
                                 </form>
                                 
