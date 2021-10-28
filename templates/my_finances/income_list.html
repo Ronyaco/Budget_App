@@ -329,6 +329,16 @@
                     <div class="col-lg-8 mt-5">
                         <div class="card">
                             <div class="card-body">
+                            {% if messages %}
+                            <ul class="messages">
+                            {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                                {{ message }}
+                            </li>
+                            {% endfor %}
+                            </ul>
+                            {% endif %}
                                 <h4 class="header-title">Incomes</h4>
                                 <h1></h1> 
                                 {% for income in object_list %}

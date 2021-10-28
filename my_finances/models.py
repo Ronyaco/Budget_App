@@ -12,7 +12,7 @@ class Income(models.Model):
 
     class RepetitionInterval(models.IntegerChoices):
         NON = 1, "NONE"
-        DAY = 2, 'DAYLY'
+        DAY = 2, 'DAILY'
         WEK = 3, 'WEEKLY'
         FNT = 4, 'FORNIGHTLY'
         MTH = 5, 'MONTHLY'
@@ -50,7 +50,7 @@ class Outcome(models.Model):
     class RepetitionInterval(models.IntegerChoices):
        
         NON = 1, "NONE"
-        DAY = 2, 'DAYLY'
+        DAY = 2, 'DAILY'
         WEK = 3, 'WEEKLY'
         FNT = 4, 'FORNIGHTLY'
         MTH = 5, 'MONTHLY'
