@@ -20,8 +20,16 @@ class IncomeDetailView(DetailView):
 
 class IncomeCreateView(CreateView):
     model = Income
-    form_class = IncomeForm
-    #success_url = reverse_lazy('my_finances:income_list')
+    #form_class = IncomeForm
+    success_url = reverse_lazy('my_finances:income_list')
+    def get_form_class(self):
+        if 'default' in self.request.GET:
+            self.fields = ['value', 'date', 'name']
+            return super().get_form_class()
+        else:
+            return IncomeForm
+
+    #template_name = 'my_finances/income_form'
 
     def get_success_url(self):
         messages.success(self.request, "Income created successfully")

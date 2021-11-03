@@ -21,13 +21,15 @@ class Income(models.Model):
        
     name = models.CharField(max_length=64)
     value = models.DecimalField(max_digits=10, decimal_places=2)
-    date = models.DateField()
+    date = models.DateField(null=True)
     category = models.PositiveSmallIntegerField(choices = IncomeTypes.choices)
     repetitive = models.BooleanField(default=False)
     repetition_interval = models.PositiveSmallIntegerField(choices = RepetitionInterval.choices, default=1)
     repetition_time = models.PositiveSmallIntegerField(default =0)
     details = models.CharField(max_length=64)
     user_id = models.IntegerField()
+    comment_char = models.TextField(max_length=255, blank=True, null=True)
+    comment_text = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return f'Income {self.id} {self.date.strftime("%d/%m/%Y")}'
