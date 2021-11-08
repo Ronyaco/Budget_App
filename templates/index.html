@@ -195,15 +195,24 @@
                             </ul>
                         </div>
                         <div class="clearfix d-md-inline-block d-block">
-                            <div class="user-profile m-0">
-                                <img class="avatar user-thumb" src="{% static 'assets/images/author/avatar.png' %}" alt="avatar">
-                                <h4 class="user-name dropdown-toggle" data-toggle="dropdown">Kumkum Rai <i class="fa fa-angle-down"></i></h4>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Message</a>
-                                    <a class="dropdown-item" href="#">Settings</a>
-                                    <a class="dropdown-item" href="#">Log Out</a>
+                            {% if user.is_authenticated %}
+                                <div class="user-profile ml-2">
+                                    <img class="avatar user-thumb" src="{% static 'assets/images/author/avatar.png' %}" alt="avatar">
+                                    <h6 class="user-name dropdown-toggle" data-toggle="dropdown">{{ user.first_name }} {{ user.last_name }} </h6>
+                                    <div class="dropdown-menu">
+                                      <a class="dropdown-item" href="{% url 'accounts:logout' %}">Log Out</a>
+                                    </div>
                                 </div>
-                            </div>
+                                {% else %}
+                                <div class="user-profile ml-2">
+                                    <img class="avatar user-thumb" src="{% static 'assets/images/author/avatar.png' %}" alt="avatar">
+                                    <h4 class="user-name dropdown-toggle" data-toggle="dropdown">Men<i class="fa fa-angle-down"></i></h4>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="{% url 'accounts:register' %}"><i class="fa fa-user-plus"></i>&nbsp;&nbsp;Sign Up</a>
+                                        <a class="dropdown-item" href="{% url 'accounts:login' %}"><i class="fa fa-sign-in"></i>&nbsp;&nbsp;&nbsp;Log In</a>
+                                    </div>
+                                </div>
+                            {% endif %}                         
                         </div>
                     </div>
                 </div>
@@ -226,6 +235,7 @@
                                             <li><a href="index3.html">SEO dashboard</a></li>
                                         </ul>
                                     </li>
+                                    {% if user.is_authenticated %}
                                     <li class="active">
                                         <a href="javascript:void(0)"><i class="ti-layout-sidebar-left"></i><span>My finances App</span></a>
                                         <ul class="submenu">
@@ -234,6 +244,7 @@
                                         </ul>
                                     </li>
                                     <li>
+                                        {% endif %}
                                         <a href="javascript:void(0)"><i class="ti-pie-chart"></i><span>Charts</span></a>
                                         <ul class="submenu">
                                             <li><a href="barchart.html">bar chart</a></li>
@@ -241,6 +252,7 @@
                                             <li><a href="piechart.html">pie chart</a></li>
                                         </ul>
                                     </li>
+
                                     <li class="mega-menu">
                                         <a href="javascript:void(0)"><i class="ti-palette"></i><span>UI Features</span></a>
                                         <ul class="submenu">
@@ -323,6 +335,16 @@
         <!-- page title area end -->
         <div class="main-content-inner">
             <div class="container">
+                {% if messages %}
+                <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                    {{ message }}
+                </li>
+                {% endfor %}
+                </ul>
+                {% endif %}
                 <div class="row">
                     <!-- seo fact area start -->
                     <div class="col-lg-8">
@@ -387,18 +409,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="header-title">User Statistics</h4>
-                                <h4>Incomes</h4> 
-                                {% for income in object_list %}
-                                <li>
-                                    <a href = "{% url 'my_finances:income_detail' income.pk %}">
-                                    {{ income.date|date}} - {{ income.name }} - ${{income.value}} - Repetitive :{{income.repetitive}} 
-                                    every {{ income.repetition_time }}  {{ income.get_repetition_interval_display }} 
-                            {% empty %}
-                                    </a>
-                                </li>
-                                <li>No  incomes yet.</li>
-                            {% endfor %}
-                                
+
                                 <div id="user-statistics"></div>
                                 
                             </div>
