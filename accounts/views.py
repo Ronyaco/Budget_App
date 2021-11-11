@@ -25,7 +25,7 @@ def register(request):
 def login_view(request):
     if request.user.is_authenticated:
         messages.info(request, mark_safe(f'You are already logged in as   <b>{request.user.username}<b>.'))
-        return redirect('website:index')
+        return redirect('website:base')
 
 
     username = ''
@@ -39,7 +39,7 @@ def login_view(request):
             messages.success(request, f'You are now logged in as {request.user.username} ')
             if not remember_me:
                 request.session.set_expiry(0)
-            return redirect('website:index')    
+            return redirect('website:base')    
             
         else:
             messages.error(request, 'Invalid username or password')
@@ -52,6 +52,6 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     messages.success(request, 'You are now logged out')
-    return redirect('website:index')
+    return redirect('website:base')
 
 

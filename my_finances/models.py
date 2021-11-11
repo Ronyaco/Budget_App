@@ -18,7 +18,8 @@ class Income(models.Model):
         MTH = 5, 'MONTHLY'
         SEM = 6, 'BIANNUALLY'
         YEA = 7, 'YEARLY'
-       
+
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name='incomes')
     name = models.CharField(max_length=64)
     value = models.DecimalField(max_digits=10, decimal_places=2)
     date = models.DateField(null=True)
@@ -27,7 +28,6 @@ class Income(models.Model):
     repetition_interval = models.PositiveSmallIntegerField(choices = RepetitionInterval.choices, default=1)
     repetition_time = models.PositiveSmallIntegerField(default =0)
     details = models.CharField(max_length=64)
-    user_id = models.IntegerField()
     comment_char = models.TextField(max_length=255, blank=True, null=True)
     comment_text = models.TextField(blank=True, null=True)
 
@@ -60,6 +60,8 @@ class Outcome(models.Model):
         YEA = 7, 'YEARLY'
 
 
+    
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name='outcomes')
     name = models.CharField(max_length=64)
     value = models.DecimalField(max_digits=10, decimal_places=2)
     date = models.DateField()
@@ -68,7 +70,7 @@ class Outcome(models.Model):
     repetition_interval = models.PositiveSmallIntegerField(choices = RepetitionInterval.choices, default=1)
     repetition_time = models.PositiveSmallIntegerField(default =0)
     details = models.CharField(max_length=64)
-    user_id = models.IntegerField()
+
     def __str__(self):
         return f'Outcome {self.id} {self.date.strftime("%m-%d-%Y")}'
     class Meta:
@@ -80,7 +82,9 @@ class Balance(models.Model):
         CUR = 1, 'CURRENT'
         SAV = 2, 'SAVINGS'
         CAS = 3, 'CASH'
+        INV = 4, 'INVESTMENT'
 
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name='balances')
     name = models.CharField(max_length=64)
     value = models.DecimalField(max_digits=10, decimal_places=2)
     date = models.DateField()
@@ -88,7 +92,6 @@ class Balance(models.Model):
     update_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
     details = models.CharField(max_length=64)
-    user_id = models.IntegerField()
 
     def __str__(self):
         return f'Balance {self.id} {self.date.strftime("%/d/%m/%Y")}'

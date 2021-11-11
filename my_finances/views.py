@@ -1,5 +1,6 @@
 from django.urls import reverse_lazy , reverse
 from django.contrib import messages
+from django.http import HttpResponseRedirect
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
@@ -13,15 +14,32 @@ class IncomeListView(ListView):
     paginate_by = 100
     #template_name = 'my_finances_list.html'
 
+    def get_queryset(self):
+        user = self.request.user
+        return Income.objects.filter(user=self.request.user).order_by('-date')
+
 
 
 class IncomeDetailView(DetailView):
     model = Income
+    def get_queryset(self):
+        user = self.request.user
+        return Income.objects.filter(user=self.request.user).order_by('-date')
 
 class IncomeCreateView(CreateView):
     model = Income
-    #form_class = IncomeForm
     success_url = reverse_lazy('my_finances:income_list')
+
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+
+
+
     def get_form_class(self):
         if 'default' in self.request.GET:
             self.fields = ['value', 'date', 'name']
