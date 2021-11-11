@@ -247,17 +247,13 @@
                             {% if user.is_authenticated %}
                             <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{user.first_name}} {{user.last_name}}<i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Message</a>
-                                <a class="dropdown-item" href="#">Settings</a>
-                                <a class="dropdown-item" href="#">Log Out</a>
-                            
+                                <a class="dropdown-item" href="{% url 'accounts:logout' %}">Logout</a>                          
                             </div>
                             {% else %}
                             <h4 class="user-name dropdown-toggle" data-toggle="dropdown"><i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Message</a>
-                                <a class="dropdown-item" href="#">Settings</a>
-                                <a class="dropdown-item" href="#">Log Out</a>
+                                <a class="dropdown-item" href="{% url 'accounts:login' %}">Login</a>  
+                                <a class="dropdown-item" href="{% url 'accounts:register' %}">Register</a>
                             
                             </div>
 
