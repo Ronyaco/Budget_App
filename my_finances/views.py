@@ -37,7 +37,7 @@ class IncomeCreateView(CreateView):
     model = Income
     form_class = IncomeForm
     template_name = 'my_finances/income_outcome_form.html'
-    extra_context = {'create_what': 'Income'}
+    extra_context = {'create_what': 'Create Income'}
 
 
 
@@ -64,6 +64,7 @@ class IncomeUpdateView(UpdateView):
     model = Income
     form_class = IncomeForm
     template_name = 'my_finances/income_outcome_form.html'
+    extra_context = {'create_what': 'Update Income'}
 
     def get_success_url(self):
         messages.success(self.request, "Income updated successfully")
@@ -107,7 +108,7 @@ class OutcomeCreateView(CreateView):
     model = Outcome
     form_class = OutcomeForm
     template_name = 'my_finances/income_outcome_form.html'
-    extra_context = {'create_what': 'Outcome'}
+    extra_context = {'create_what': 'Create Outcome'}
 
 
     def form_valid(self, form):
@@ -116,17 +117,12 @@ class OutcomeCreateView(CreateView):
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
 
-
-
-
     def get_form_class(self):
         if 'default' in self.request.GET:
             self.fields = ['value', 'date', 'name']
             return super().get_form_class()
         else:
             return OutcomeForm
-
-
 
     def get_success_url(self):
         messages.success(self.request, "Outcome created successfully")
@@ -137,6 +133,7 @@ class OutcomeUpdateView(UpdateView):
     model = Outcome
     form_class = OutcomeForm
     template_name = 'my_finances/income_outcome_form.html'
+    extra_context = {'create_what': 'Update Outcome'}
     
 
     def get_success_url(self):
