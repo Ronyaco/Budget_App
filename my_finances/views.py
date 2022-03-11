@@ -12,21 +12,21 @@ from my_finances.models import Income , Outcome
 class IncomeListView(ListView):
     model = Income
     paginate_by = 100
-    template_name = 'my_finances/income_list.html'
-    extra_context = {'title': 'Income'}
+    template_name = 'my_finances/income_outcome_list.html'
+    extra_context = {'list_what': 'Income' }
 
     def get_queryset(self):
         user = self.request.user
         return Income.objects.filter(user=self.request.user).order_by('-date')
 
-    
 
 
 
 class IncomeDetailView(DetailView):
     model = Income
-    template_name = 'my_finances/income_detail.html'
+    template_name = 'my_finances/income_outcome_detail.html'
     extra_context = {'detail_what': 'Income'}
+
 
 
     def get_queryset(self):
@@ -40,8 +40,8 @@ class IncomeDetailView(DetailView):
 class IncomeCreateView(CreateView):
     model = Income
     form_class = IncomeForm
-    template_name = 'my_finances/income_form.html'
-    success_url = reverse_lazy('my_finances:income_list')
+    template_name = 'my_finances/income_outcome_form.html'
+
 
 
     def form_valid(self, form):
@@ -70,7 +70,7 @@ class IncomeCreateView(CreateView):
 class IncomeUpdateView(UpdateView):
     model = Income
     form_class = IncomeForm
-    template_name = 'my_finances/income_form.html'
+    template_name = 'my_finances/income_outcome_form.html'
 
     def get_success_url(self):
         messages.success(self.request, "Income updated successfully")
@@ -79,14 +79,15 @@ class IncomeUpdateView(UpdateView):
 
 class IncomeDeleteView(SuccessMessageMixin,  DeleteView):
     model = Income
-    success_url = reverse_lazy('my_finances:income_list')
-    success_message = "It was created successfully"
+    template_name = 'my_finances/income_outcome_confirm_delete.html'
+    extra_context = {'delete_what': 'Income'}
 
 
 class OutcomeListView(ListView):
     model = Outcome
     paginate_by = 100
-    template_name = 'my_finances/outcome_list.html'
+    template_name = 'my_finances/income_outcome_list.html'
+    extra_context = {'list_what': 'Outcome'}
 
     def get_queryset(self):
         user = self.request.user
@@ -96,9 +97,10 @@ class OutcomeListView(ListView):
 
 class OutcomeDetailView(DetailView):
     model = Outcome
-    form_class = OutcomeForm
-    template_name = 'my_finances/outcome_detail.html'
+    template_name = 'my_finances/income_outcome_detail.html'
     extra_context = {'detail_what': 'Outcome'}
+
+
 
     def get_queryset(self):
         user = self.request.user
@@ -107,8 +109,7 @@ class OutcomeDetailView(DetailView):
 class OutcomeCreateView(CreateView):
     model = Outcome
     form_class = OutcomeForm
-    template_name = 'my_finances/outcome_form.html'
-    success_url = reverse_lazy('my_finances:outcome_list')
+    template_name = 'my_finances/income_outcome_form.html'
 
 
     def form_valid(self, form):
@@ -137,7 +138,7 @@ class OutcomeCreateView(CreateView):
 class OutcomeUpdateView(UpdateView):
     model = Outcome
     form_class = OutcomeForm
-    template_name = 'my_finances/outcome_form.html'
+    template_name = 'my_finances/income_outcome_form.html'
 
     def get_success_url(self):
         messages.success(self.request, "Outcome updated successfully")
@@ -146,6 +147,13 @@ class OutcomeUpdateView(UpdateView):
 
 class OutcomeDeleteView(SuccessMessageMixin,  DeleteView):
     model = Outcome
-    success_url = reverse_lazy('my_finances:outcome_list')
-    success_url = reverse_lazy('my_finances:outcome_list')
-    success_message = "It was created successfully"
+    template_name = 'my_finances/income_outcome_confirm_delete.html'
+    extra_context = {'delete_what': 'Outcome'}
+
+    def get_queryset(self):
+        user = self.request.user
+        return Outcome.objects.filter(user=user)
+        
+    def get_success_url(self):
+        messages.success(self.request, 'Outcome deleted successfully')
+        return reverse_lazy('my_finances:outcome_list')

@@ -10,16 +10,20 @@
         <div class="col-lg-8 mt-5">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title">{{ title }}</h4>
+                    <h4 class="header-title">{{ list_what }}s</h4>
                      
-                    {% for income in object_list %}
+                    {% for object in object_list %}
                     <li>
-      
-                        <a href = "{% url 'my_finances:income_detail' income.pk %}">
+                    {%  if list_what == 'income'  %}
+                        <a href = "{% url 'my_finances:income_detail' object.pk %}">
+                                                {% else %}
+                        <a href = "{% url 'my_finances:outcome_detail' object.pk %}">
+
+                    {% endif %}
 
 
-                        {{ income.date|date}} - {{ income.name }} - ${{income.value}} - Repetitive :{{income.repetitive}} 
-                        every {{ income.repetition_time }}  {{ income.get_repetition_interval_display }} 
+                        {{ object.date|date}} - {{ object.name }} - ${{object.value}} - Repetitive :{{object.repetitive}}
+                        every {{ object.repetition_time }}  {{ object.get_repetition_interval_display }}
                 {% empty %}
                         </a>
                     </li>
