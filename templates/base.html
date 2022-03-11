@@ -49,8 +49,16 @@
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-dashboard"></i><span>My Finances</span></a>
                                 {% if user.is_authenticated %}
                                 <ul class="collapse">
-                                    <li class="active"><a href="{% url 'my_finances:income_create' %}">Create Income</a></li>
-                                    <li><a href="{% url 'my_finances:income_list' %}">Income List</a></li>
+                                    <li class="active">
+                                    <a href="{% url 'my_finances:income_create' %}">Create Income</a></li>
+                                    <a href="{% url 'my_finances:outcome_create' %}">Create Outcome</a></li>
+                                    
+                                    
+                                    <a href="{% url 'my_finances:income_list' %}">Income List</a></li>
+
+
+                                    <a href="{% url 'my_finances:outcome_list' %}">Outcome List</a></li>
+                                    
                                 </ul>
                                 {% endif %}
 

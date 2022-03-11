@@ -25,7 +25,7 @@ class IncomeListView(ListView):
 class IncomeDetailView(DetailView):
     model = Income
     template_name = 'my_finances/income_outcome_detail.html'
-    extra_context = {'detail_what': 'Income'}
+    extra_context = {'detail_what': 'Income' }
 
 
 
@@ -33,14 +33,11 @@ class IncomeDetailView(DetailView):
         user = self.request.user
         return Income.objects.filter(user=self.request.user).order_by('-date')
 
-    def get_success_url(self):
-        messages.success(self.request, 'Income updated successfully')
-        return reverse('my_finances:income_list')
-
 class IncomeCreateView(CreateView):
     model = Income
     form_class = IncomeForm
     template_name = 'my_finances/income_outcome_form.html'
+    extra_context = {'create_what': 'Income'}
 
 
 
@@ -50,17 +47,13 @@ class IncomeCreateView(CreateView):
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
 
-
-
-
     def get_form_class(self):
         if 'default' in self.request.GET:
             self.fields = ['value', 'date', 'name']
             return super().get_form_class()
         else:
             return IncomeForm
-
-    
+ 
 
     def get_success_url(self):
         messages.success(self.request, "Income created successfully")
@@ -81,6 +74,10 @@ class IncomeDeleteView(SuccessMessageMixin,  DeleteView):
     model = Income
     template_name = 'my_finances/income_outcome_confirm_delete.html'
     extra_context = {'delete_what': 'Income'}
+
+    def get_success_url(self):
+        messages.success(self.request, "Income deleted successfully")
+        return reverse_lazy('my_finances:income_list')
 
 
 class OutcomeListView(ListView):
@@ -110,6 +107,7 @@ class OutcomeCreateView(CreateView):
     model = Outcome
     form_class = OutcomeForm
     template_name = 'my_finances/income_outcome_form.html'
+    extra_context = {'create_what': 'Outcome'}
 
 
     def form_valid(self, form):
@@ -139,10 +137,11 @@ class OutcomeUpdateView(UpdateView):
     model = Outcome
     form_class = OutcomeForm
     template_name = 'my_finances/income_outcome_form.html'
+    
 
     def get_success_url(self):
-        messages.success(self.request, "Outcome updated successfully")
-        return reverse('my_finances:outcome_detail', kwargs={'pk': self.object.pk} ) 
+        messages.success(self.request, "Outcome Updated successfully")
+        return reverse_lazy('my_finances:outcome_list')
 
 
 class OutcomeDeleteView(SuccessMessageMixin,  DeleteView):
@@ -155,5 +154,5 @@ class OutcomeDeleteView(SuccessMessageMixin,  DeleteView):
         return Outcome.objects.filter(user=user)
         
     def get_success_url(self):
-        messages.success(self.request, 'Outcome deleted successfully')
+        messages.success(self.request, "Outcome created successfully")
         return reverse_lazy('my_finances:outcome_list')

@@ -14,9 +14,9 @@
                      
                     {% for object in object_list %}
                     <li>
-                    {%  if list_what == 'income'  %}
+                    {%  if list_what == 'Income'  %}
                         <a href = "{% url 'my_finances:income_detail' object.pk %}">
-                                                {% else %}
+                        {% else %}
                         <a href = "{% url 'my_finances:outcome_detail' object.pk %}">
 
                     {% endif %}

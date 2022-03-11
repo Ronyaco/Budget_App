@@ -9,7 +9,7 @@
             <div class="col-lg-8 mt-5">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">Income  {{object.pk}}</h4>
+                        <h4 class="header-title"> {{object.pk}}</h4>
                          <ul>
                             <form method="post">{% csrf_token %}
                                 <p>Are you sure you want to delete "{{ object }}"?</p>
