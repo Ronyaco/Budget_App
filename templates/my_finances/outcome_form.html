@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<div class="main-content-inner">
+    <div class="container">
+        <div class="row">
+
+            <!-- Statistics area start -->
+            <div class="col-lg-8 mt-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title">Outcomes</h4>
+                        <form method="post">{% csrf_token %}
+                            {{ form|crispy }}
+                            <input type="submit" value="Save">
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+            <!-- Statistics area end -->
+                            
+        </div>
+    </div>
+</div>
+        
+
+{% endblock %}
+
+{% block hidden_content %}
+{% endblock %}
