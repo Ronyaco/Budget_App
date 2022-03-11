@@ -130,7 +130,7 @@ class OutcomeCreateView(CreateView):
 
 
     def get_success_url(self):
-        messages.success(self.request, "Income created successfully")
+        messages.success(self.request, "Outcome created successfully")
         return reverse_lazy('my_finances:outcome_list')
 
 
@@ -140,7 +140,7 @@ class OutcomeUpdateView(UpdateView):
     template_name = 'my_finances/outcome_form.html'
 
     def get_success_url(self):
-        messages.success(self.request, "Income updated successfully")
+        messages.success(self.request, "Outcome updated successfully")
         return reverse('my_finances:outcome_detail', kwargs={'pk': self.object.pk} ) 
 
 

@@ -14,11 +14,16 @@
                      
                     {% for income in object_list %}
                     <li>
-                        {% if title == 'Outcome' %}
+
                         <a href = "{% url 'my_finances:Outcome_detail' income.pk %}">
-                        {% else %}
-                        <a href = "{% url 'my_finances:Outcome_detail' outcome.pk %}">
-                        {% endif %}
+                            <div class="media">
+                                <div class="media-body">
+                                    <h5 class="mt-0 mb-1">{{ income.title }}</h5>
+                                    <p class="mb-1">{{ income.description }}</p>
+                                    <p class="mb-1">{{ income.date }}</p>
+                                    <p class="mb-1">{{ income.amount }}</p>
+                                </div>
+                            </div>
                         {{ object.date|date}} - {{ object.name }} - ${{object.value}} - Repetitive :{{object.repetitive}} 
                         every {{ object.repetition_time }}  {{ object.get_repetition_interval_display }} 
                 {% empty %}
