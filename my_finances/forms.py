@@ -25,6 +25,5 @@ class IncomeForm(forms.ModelForm):
     repetition_interval = forms.ChoiceField(choices=Income.RepetitionInterval.choices, initial=1)
     repetition_time = forms.IntegerField(initial = 0)
     details = forms.CharField(max_length=64)
-    user_id = forms.IntegerField(initial = 0)
     comment_char = forms.CharField(max_length=255, required=False)
     comment_text = forms.CharField(required=False, widget = forms.Textarea)
