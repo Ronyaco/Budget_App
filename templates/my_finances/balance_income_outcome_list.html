@@ -16,14 +16,17 @@
                     <li>
                     {%  if list_what == 'Income'  %}
                         <a href = "{% url 'my_finances:income_detail' object.pk %}">
-                        {% else %}
+                        {% elif list_what == 'Outcome' %}
                         <a href = "{% url 'my_finances:outcome_detail' object.pk %}">
+                        {% elif list_what == 'Balance' %}
+                        <a href = "{% url 'my_finances:balance_detail' object.pk %}">
+                        {% endif %}
+                        {{ object.id}} - {{ object.date|date}} - {{ object.name }}-{{ object.get_type_display }}  - ${{object.value}} 
 
-                    {% endif %}
-
-
-                        {{ object.date|date}} - {{ object.name }} - ${{object.value}} - Repetitive :{{object.repetitive}}
-                        every {{ object.repetition_time }}  {{ object.get_repetition_interval_display }}
+                        {% if repetititve %}
+                        <span class="badge badge-pill badge-success">Repetitive</span>
+                        every {{ object.repetition_time }} -  {{ object.get_repetition_interval_display }}
+                        {% endif %}
                 {% empty %}
                         </a>
                     </li>
