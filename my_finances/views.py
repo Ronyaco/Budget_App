@@ -73,7 +73,7 @@ class IncomeUpdateView(UpdateView):
 
 class IncomeDeleteView(SuccessMessageMixin,  DeleteView):
     model = Income
-    template_name = 'my_finances/income_outcome_confirm_delete.html'
+    template_name = 'my_finances/balance_income_outcome_confirm_delete.html'
     extra_context = {'delete_what': 'Income'}
 
     def get_success_url(self):
@@ -169,7 +169,7 @@ class BalanceListView(ListView):
 
 class BalanceDetailView(DetailView):
     model = Balance
-    template_name = 'my_finances/balance_detail.html'
+    template_name = 'my_finances/balance_income_outcome_detail.html'
     extra_context = {'detail_what': 'Balance'}
 
 
@@ -222,8 +222,8 @@ class BalanceDeleteView(SuccessMessageMixin,  DeleteView):
 
     def get_queryset(self):
         user = self.request.user
-        return Outcome.objects.filter(user=user)
+        return Balance.objects.filter(user=user)
 
     def get_success_url(self):
-        messages.success(self.request, "Outcome created successfully")
+        messages.success(self.request, "Balance deleted successfully")
         return reverse_lazy('my_finances:balance_list')

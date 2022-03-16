@@ -89,7 +89,6 @@ class Balance(models.Model):
     type = models.PositiveSmallIntegerField(choices = BalanceTypes.choices, default=1)
     value = models.DecimalField(max_digits=10, decimal_places=2)
     date = models.DateField()
-    category = models.PositiveSmallIntegerField(choices =  BalanceTypes.choices)
     update_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
     comments = models.CharField(max_length=64)

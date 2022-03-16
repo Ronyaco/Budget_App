@@ -50,10 +50,12 @@
                                 {% if user.is_authenticated %}
                                 <ul class="collapse">
                                     <li class="active">
+                                    <h6 style="color:white;">Hola {{user.first_name}}, Bienvenido</h6>
+                                    <h6 class="collapse-header">Updates Finances</h6>
+                                    <a href="{% url 'my_finances:balance_create' %}">Create Balance</a></li>
                                     <a href="{% url 'my_finances:income_create' %}">Create Income</a></li>
                                     <a href="{% url 'my_finances:outcome_create' %}">Create Outcome</a></li>
-                                    
-                                    
+                                    <a href="{% url 'my_finances:balance_list' %}">Balance List</a></li>
                                     <a href="{% url 'my_finances:income_list' %}">Income List</a></li>
 
 
