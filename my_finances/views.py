@@ -1,10 +1,14 @@
+from datetime import date
+from multiprocessing import context
 from django.urls import reverse_lazy , reverse
 from django.contrib import messages
 from django.http import HttpResponseRedirect
+from django.shortcuts import render
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView , UpdateView , DeleteView
+from django.db.models import Sum
 
 from my_finances.forms import IncomeForm , OutcomeForm , BalanceForm
 from my_finances.models import Income , Outcome , Balance
@@ -227,3 +231,37 @@ class BalanceDeleteView(SuccessMessageMixin,  DeleteView):
     def get_success_url(self):
         messages.success(self.request, "Balance deleted successfully")
         return reverse_lazy('my_finances:balance_list')
+
+
+def current_finances(request):
+    last_balance = Balance.objects.filter(user=request.user, type=1).order_by('-date').first()
+    if not last_balance:
+        messages.warning(request, "You don't have any balance yet. Please add one.")  
+        return render(request, 'my_finances/current_finances.html')
+
+    today = date.today()
+    total_income = Income.objects.filter(user=request.user,dta__gte = last_balance.date, date__lte= today).aggregate(Sum('value'))['value__sum']
+    total_income = total_income if total_income else 0
+    total_outcome = Outcome.objects.filter(user=request.user,dta__gte = last_balance.date, date__lte= today).aggregate(Sum('value'))['value__sum']
+    total_outcome = total_outcome if total_outcome else 0
+
+    # update totals with repetitive incomes
+
+    for income in Income.objects.filter(user=request.user):
+        total_income += calculate_repetitive_total(income, last_balance, today)
+    for outcome in Outcome.objects.filter(user=request.user):
+        total_outcome += calculate_repetitive_total(outcome, last_balance, today)
+        
+
+
+
+
+
+    return render(request, 'my_finances/current_finances.html', context = context)
+
+    
+
+
+def history_finances(request):
+    pass
+   

@@ -22,5 +22,9 @@ urlpatterns = [
     path('balance_detail/<pk>', views.BalanceDetailView.as_view(), name='balance_detail'),
     path('balance_create/', views.BalanceCreateView.as_view(), name='balance_create'),
     path('balance_update/<pk>', views.BalanceUpdateView.as_view(), name='balance_update'),
-    path('balance_delete/<pk>', views.BalanceDeleteView.as_view(), name='balance_delete')
+    path('balance_delete/<pk>', views.BalanceDeleteView.as_view(), name='balance_delete'),
+
+    path('current_finances/', views.current_finances, name='current_finances'),
+    path('history_finances/', views.history_finances, name='history_finances'),
+
 ]
