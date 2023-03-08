@@ -1,7 +1,6 @@
 from django.apps import AppConfig
 
 
-class MyFinancesConfig(AppConfig):
+class TaskTrackerConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'my_finances'
-
+    name = 'task_tracker'

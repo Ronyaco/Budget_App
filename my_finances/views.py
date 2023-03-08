@@ -9,7 +9,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView , UpdateView , DeleteView
 from django.db.models import Sum
-
+from my_finances.helpers import calculate_repetitive_total
 from my_finances.forms import IncomeForm , OutcomeForm , BalanceForm
 from my_finances.models import Income , Outcome , Balance
 
@@ -240,9 +240,9 @@ def current_finances(request):
         return render(request, 'my_finances/current_finances.html')
 
     today = date.today()
-    total_income = Income.objects.filter(user=request.user,dta__gte = last_balance.date, date__lte= today).aggregate(Sum('value'))['value__sum']
+    total_income = Income.objects.filter(user=request.user,date__gte = last_balance.date, date__lte= today).aggregate(Sum('value'))['value__sum']
     total_income = total_income if total_income else 0
-    total_outcome = Outcome.objects.filter(user=request.user,dta__gte = last_balance.date, date__lte= today).aggregate(Sum('value'))['value__sum']
+    total_outcome = Outcome.objects.filter(user=request.user,date__gte = last_balance.date, date__lte= today).aggregate(Sum('value'))['value__sum']
     total_outcome = total_outcome if total_outcome else 0
 
     # update totals with repetitive incomes
@@ -251,11 +251,7 @@ def current_finances(request):
         total_income += calculate_repetitive_total(income, last_balance, today)
     for outcome in Outcome.objects.filter(user=request.user):
         total_outcome += calculate_repetitive_total(outcome, last_balance, today)
-        
-
-
-
-
+       
 
     return render(request, 'my_finances/current_finances.html', context = context)
 

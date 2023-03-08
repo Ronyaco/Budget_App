@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      {% if user.is_authenticated %}
+      <button id="add-task-btn" class="btn btn-success btn-sm mb-3">Add Task</button>
+      <div id="task-form-container"></div>
+      {% endif %}
+      </div>
+      
+      <h1 class="mt-3">Task List</h1>
+      <table id="table_task" class="table table-striped">
+        <thead>
+          <tr>
+            <th>Task ID</th>
+            <th>Client Name</th>
+            <th>Job Description</th>
+            <th>Reocurring</th>
+            <th>Phone_Number</th>
+            <th>Job_address</th>
+            <th>Frequency</th>
+            <th>Case_Manager</th>
+            <th>Contractor</th>
+            <th>Assign_to</th>
+            <th>Last_Booking_Date</th>
+            <th>New_Booking_Date</th>
+            <th>Time_confirmed</th>
+            <th>Status</th>
+            <th>Comments</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for task in tasks %}
+              <tr id="row_{{ task.id }}">
+                  <td>{{ task.id }}</td>
+                  <td class="editable" contenteditable="false">{{ task.client_name }}</td>
+                  <td class="editable" contenteditable="false">{{ task.job_description }}</td>
+                  <td class="editable" contenteditable="false">{{ task.reoccurring }}</td>
+                  <td class="editable" contenteditable="false">{{ task.phone_number }}</td>
+                  <td class="editable" contenteditable="false">{{ task.job_address }}</td>
+                  <td class="editable" contenteditable="false">{{ task.frequency }}</td>
+                  <td class="editable" contenteditable="false">{{ task.case_manager }}</td>
+                  <td class="editable" contenteditable="false">{{ task.contractor }}</td>
+                  <td class="editable" contenteditable="false">{{ task.assign_to }}</td>
+                  <td class="editable" contenteditable="false">{{ task.last_booking_date }}</td>
+                  <td class="editable" contenteditable="false">{{ task.new_booking_date }}</td>
+                  <td class="editable" contenteditable="false">{{ task.time_confirmed }}</td>
+                  <td class="editable" contenteditable="false">{{ task.status }}</td>
+                  <td class="editable" contenteditable="false">{{ task.comments }}</td>
+                  <td>
+              <div class="d-flex justify-content-between">
+                <button class="btn btn-primary btn-sm edit-btn">Edit</button>
+                <span class="mx-1"></span>
+                <button class="btn btn-danger btn-sm delete-btn">Delete</button>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

@@ -27,4 +27,5 @@ urlpatterns = [
     path('current_finances/', views.current_finances, name='current_finances'),
     path('history_finances/', views.history_finances, name='history_finances'),
 
+
 ]

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+
+<div class="col-md-6 mt-md-5 mb-3">
+    <div class="card">
+        <div class="seo-fact sbg2">
+            <div class="p-4 d-flex justify-content-between align-items-center">
+                <div class="seofct-icon"><i class="ti-user"></i> Profile</div>
+                <h2>{{ user.username }}</h2>
+            </div>
+            <h2> {% for object in object_list %} {{ object.Job_Description }} {% endfor %} </h2>
+            <canvas id="seolinechart2" height="50"></canvas>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 mt-md-5 mb-3">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="header-title">User Statistics</h4>
+            <div id="user-statistics"></div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+{% endblock %}
+
+{% block hidden_content %}
+{% endblock %}

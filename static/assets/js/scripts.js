@@ -98,7 +98,9 @@
     ==================================*/
     if ($('#dataTable').length) {
         $('#dataTable').DataTable({
-            responsive: true
+            responsive: true,
+            paging: true
+            
         });
     }
     if ($('#dataTable2').length) {

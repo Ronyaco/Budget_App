@@ -42,6 +42,10 @@ INSTALLED_APPS = [
     'crispy_forms',
     'website',
     'my_finances',
+    'import_export',
+    'task_tracker',
+    'method_override',
+
 
 ]
 

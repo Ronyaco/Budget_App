@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+
+{% if not balance %}
+<div class="alert alert-danger">
+    <strong>Error!</strong> You have no balance.
+
+{% else %}
+<div class="alert alert-success">
+    <strong>Success!</strong> You have {{ balance }} credits.
+
+{% endif %}
+
+{% endblock %}
+
+{% block hidden_content %}
+{% endblock %}

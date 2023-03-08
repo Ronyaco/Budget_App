@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<div class="main-content-inner">
+    <div class="container">
+        <div class="row">
+
+            <!-- Statistics area start -->
+            <div class="col-lg-8 mt-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title">{{ detail_what }}  {{object.pk}}</h4>
+                         <ul>
+                                <li>Date : {{ object.date|date}}</li>
+                                <li>Name :  {{ object.name }}</li>
+                                <li>Value :  {{ object.value }}</li>
+                                <li>Day of the month:  {{ object.repetition_time }}</li>
+                                <li>User:  {{ object.user_id }}</li>
+                                {% if detail_what != "Balance" %}
+                                {% if object.reptitive %}
+                                    <li>
+                                        Every : {{ object.repetition_time }}     {{ object.get_repetition_interval_display }}
+                                    </li>
+                                {% endif %}
+                                {% endif %}
+                            </ul>
+                    {% if detail_what == 'Income' %}
+                    <a href ="{% url 'my_finances:income_update' object.pk %}" class="btn btn-primary mt-4 pr-4 pl-4">Update</a>
+                    <a href ="{% url 'my_finances:income_delete' object.pk %}" class="btn btn-primary mt-4 pr-4 pl-4">Delete</a>
+                    {% elif detail_what == 'Outcome' %}
+                        <a href ="{% url 'my_finances:outcome_update' object.pk %}" class="btn btn-primary mt-4 pr-4 pl-4">Update</a>
+                        <a href ="{% url 'my_finances:outcome_delete' object.pk %}" class="btn btn-primary mt-4 pr-4 pl-4">Delete</a>
+                    {% elif detail_what == 'Balance' %}
+                        <a href ="{% url 'my_finances:balance_update' object.pk %}" class="btn btn-primary mt-4 pr-4 pl-4">Update</a>
+                        <a href ="{% url 'my_finances:balance_delete' object.pk %}" class="btn btn-primary mt-4 pr-4 pl-4">Delete</a>
+                    {% endif %}
+                    
+
+
+                    </div>
+                </div>
+            </div>
+            <!-- Statistics area end -->
+                            
+        </div>
+    </div>
+</div>
+        
+
+{% endblock %}
+
+{% block hidden_content %}
+{% endblock %}

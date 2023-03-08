@@ -22,8 +22,12 @@
         <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
         <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}">
         <!-- modernizr css -->
+        <link rel="stylesheet" href = "https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"
         <script src="{% static 'assets/js/vendor/modernizr-2.8.3.min.js' %}"></script>
     </head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
 
 <body>
     <!--[if lt IE 8]>
@@ -165,8 +169,7 @@
                                     <div class="nofity-list">
                                         <a href="#" class="notify-item">
                                             <div class="notify-thumb">
-                                                <img src="{% static 'assets/images/author/author-img1.jpg' %} alt="image">
-                                            </div>
+                                                <img src="{% static 'assets/images/author/author-img1.jpg' %}" alt="image">
                                             <div class="notify-text">
                                                 <p>Aglae Mayer</p>
                                                 <span class="msg">Hey I am waiting for you...</span>
@@ -520,6 +523,152 @@
     <!-- others plugins -->
     <script src="{% static 'assets/js/plugins.js' %}"></script>
     <script src="{% static 'assets/js/scripts.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+
+<!--DataTable script-->
+    <script>
+        $(document).ready(function () {
+            $('#table_task').DataTable({
+                initComplete: function () {
+                    this.api()
+                        .columns()
+                        .every(function () {
+                            var column = this;
+                            var select = $('<select><option value=""></option></select>')
+                                .appendTo($(column.header()).empty())
+                                .css('width', '50%')
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                                    column.search(val ? '^' + val + '$' : '', true, false).draw();
+                                });
+         
+                            column
+                                .data()
+                                .unique()
+                                .sort()
+                                .each(function (d, j) {
+                                    select.append('<option value="' + d + '">' + d + '</option>');
+                                });
+                        });
+                },
+            });
+        });
+            $('#add-task-btn').click(function() {
+                $('#add-task-form').toggle();
+            });
+    
+            $('#add-task-form').on('submit', function(event) {
+                event.preventDefault();
+                var form = $(this);
+                var data = form.serialize();
+    
+                $.ajax({
+                    url: form.attr('action'),
+                    method: 'POST',
+                    data: data,
+                    success: function(response) {
+                        // Reload the table to show the new task
+                        $('#table_task').DataTable().ajax.reload();
+    
+                        // Hide the form after submission
+                        $('#add-task-form').hide();
+    
+                        // Reset the form fields
+                        form.trigger('reset');
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                        alert('An error occurred while trying to add the task.');
+                    }
+                });
+            });
+    
+    </script>
+    <script>
+      
+        $(document).on('click', '.edit-btn', function() {
+          var row = $(this).closest('tr');
+          row.find('.editable').attr('contenteditable', true);
+          row.find('.edit-btn').text('Save').removeClass('edit-btn').addClass('save-btn');
+        });
+      
+        $(document).on('click', '.save-btn', function() {
+          if (confirm("Are you sure you want to save the changes?")) {
+            var row = $(this).closest('tr');
+            var task_id = row.attr('id').split('_')[1];
+            var client_name = row.find('.editable')[0].innerText;
+            var job_description = row.find('.editable')[1].innerText;
+            var reocurring = row.find('.editable')[2].innerText;
+            var frequency = row.find('.editable')[3].innerText;
+            var phone_number = row.find('.editable')[4].innerText;
+            var job_address = row.find('.editable')[5].innerText;
+            var case_manager = row.find('.editable')[6].innerText;
+            var contractor = row.find('.editable')[7].innerText;
+            var assign_to = row.find('.editable')[8].innerText;
+            var last_booking_date = row.find('.editable')[9].innerText;
+            var new_booking_date = row.find('.editable')[10].innerText;
+            var time_confirmed = row.find('.editable')[11].innerText;
+            var status = row.find('.editable')[12].innerText;
+      
+            $.ajax({
+              url: '/task_tracker/task/' + task_id + '/update/',
+              method: 'POST',
+              headers: {
+                'X-CSRFToken': '{{ csrf_token }}'
+              },
+              data: {
+                  'task_id': task_id,
+                  'client_name': client_name,
+                  'job_description': job_description,
+                  'reocurring': reocurring,
+                  'frequency': frequency,
+                  'phone_number': phone_number,
+                  'job_address': job_address,
+                  'case_manager': case_manager,
+                  'contractor': contractor,
+                  'assign_to': assign_to,
+                  'last_booking_date': last_booking_date,
+                  'new_booking_date': new_booking_date,
+                  'time_confirmed': time_confirmed,
+                  'status': status
+                },
+              success: function(response) {
+                row.find('.editable').attr('contenteditable', false);
+                row.find('.save-btn').text('Edit').removeClass('save-btn').addClass('edit-btn');
+              },
+              error: function(xhr, status, error) {
+                console.error(error);
+                alert('An error occurred while trying to save the changes.');
+              }
+            });
+          }
+        });
+      
+        $(document).on('click', '.delete-btn', function() {
+          if (confirm("Are you sure you want to delete the task?")) {
+            var row = $(this).closest('tr');
+            var task_id = row.attr('id').split('_')[1];
+      
+            $.ajax({
+              url: '/task_tracker/task/' + task_id + '/delete/',
+              method: 'POST',
+              headers: {
+                'X-CSRFToken': '{{ csrf_token }}'
+              },
+              data: {
+                'task_id': task_id
+              },
+              success: function(response) {
+                row.remove();
+              }
+            });
+          }
+        });
+      </script>
+      
+
 </body>
 
 </html>
